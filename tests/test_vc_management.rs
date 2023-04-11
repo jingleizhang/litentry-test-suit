@@ -70,6 +70,64 @@ fn tc_request_vc_works() {
 }
 
 #[test]
+fn tc_request_vc_a2() {
+    let alice = sr25519::Pair::from_string("//Alice", None).unwrap();
+    let api_client = ApiClient::new_with_signer(alice).unwrap();
+
+    let shard = api_client.get_shard().unwrap();
+    let user_shielding_key = generate_user_shielding_key();
+    api_client
+        .set_user_shielding_key(&shard, &user_shielding_key)
+        .unwrap();
+
+    //staging
+    let guild_id = ParameterString::try_from("919848390156767232".as_bytes().to_vec()).unwrap();
+    let a2 = Assertion::A2(guild_id.clone());
+
+    let assertions = vec![a2];
+    assertions.into_iter().for_each(|assertion| {
+        api_client.request_vc(&shard, &assertion);
+
+        let event = api_client.wait_event::<VCIssuedEvent>();
+        assert!(event.is_ok());
+        let event = event.unwrap();
+        assert_eq!(event.account, api_client.get_signer().unwrap());
+    });
+
+    print_passed()
+}
+
+#[test]
+fn tc_request_vc_a3() {
+    let alice = sr25519::Pair::from_string("//Alice", None).unwrap();
+    let api_client = ApiClient::new_with_signer(alice).unwrap();
+
+    let shard = api_client.get_shard().unwrap();
+    let user_shielding_key = generate_user_shielding_key();
+    api_client
+        .set_user_shielding_key(&shard, &user_shielding_key)
+        .unwrap();
+
+    //staging
+    let guild_id = ParameterString::try_from("919848390156767232".as_bytes().to_vec()).unwrap();
+    let channel_id = ParameterString::try_from("919848392035794945".as_bytes().to_vec()).unwrap();
+    let role_id = ParameterString::try_from("1034083718425493544".as_bytes().to_vec()).unwrap();
+    let a3 = Assertion::A3(guild_id.clone(), channel_id.clone(), role_id.clone());
+
+    let assertions = vec![a3];
+    assertions.into_iter().for_each(|assertion| {
+        api_client.request_vc(&shard, &assertion);
+
+        let event = api_client.wait_event::<VCIssuedEvent>();
+        assert!(event.is_ok());
+        let event = event.unwrap();
+        assert_eq!(event.account, api_client.get_signer().unwrap());
+    });
+
+    print_passed()
+}
+
+#[test]
 pub fn tc_batch_request_vc() {
     let alice = sr25519::Pair::from_string("//Alice", None).unwrap();
     let api_client = ApiClient::new_with_signer(alice).unwrap();
