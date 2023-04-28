@@ -51,7 +51,7 @@ fn get_expected_raw_message(who: &Address32, identity: &Identity, code: &Challen
 pub fn build_vdata_discord() -> ValidationData {
     let v = DiscordValidationData {
         channel_id: ParameterString::try_from("919848392035794945".as_bytes().to_vec()).unwrap(),
-        message_id: ParameterString::try_from("1095003108876230717".as_bytes().to_vec()).unwrap(),
+        message_id: ParameterString::try_from("1101456458970824805".as_bytes().to_vec()).unwrap(),
         guild_id: ParameterString::try_from("919848390156767232".as_bytes().to_vec()).unwrap(),
     };
 
@@ -59,7 +59,7 @@ pub fn build_vdata_discord() -> ValidationData {
     data
 }
 
-pub fn build_msg_discord(
+pub fn build_msg_web2(
     who: &Address32,
     identity: &Identity,
     challenge_code: &ChallengeCode,

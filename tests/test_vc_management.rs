@@ -75,13 +75,13 @@ fn tc_request_vc_a2() {
     let api_client = ApiClient::new_with_signer(alice).unwrap();
 
     let shard = api_client.get_shard().unwrap();
-    let user_shielding_key = generate_user_shielding_key();
-    api_client
-        .set_user_shielding_key(&shard, &user_shielding_key)
-        .unwrap();
+    // let user_shielding_key = generate_user_shielding_key();
+    // api_client
+    //     .set_user_shielding_key(&shard, &user_shielding_key)
+    //     .unwrap();
 
     //staging
-    let guild_id = ParameterString::try_from("919848390156767232".as_bytes().to_vec()).unwrap();
+    let guild_id = ParameterString::try_from("807161594245152800".as_bytes().to_vec()).unwrap();
     let a2 = Assertion::A2(guild_id.clone());
 
     let assertions = vec![a2];
@@ -103,15 +103,15 @@ fn tc_request_vc_a3() {
     let api_client = ApiClient::new_with_signer(alice).unwrap();
 
     let shard = api_client.get_shard().unwrap();
-    let user_shielding_key = generate_user_shielding_key();
-    api_client
-        .set_user_shielding_key(&shard, &user_shielding_key)
-        .unwrap();
+    // let user_shielding_key = generate_user_shielding_key();
+    // api_client
+    //     .set_user_shielding_key(&shard, &user_shielding_key)
+    //     .unwrap();
 
     //staging
-    let guild_id = ParameterString::try_from("919848390156767232".as_bytes().to_vec()).unwrap();
-    let channel_id = ParameterString::try_from("919848392035794945".as_bytes().to_vec()).unwrap();
-    let role_id = ParameterString::try_from("1034083718425493544".as_bytes().to_vec()).unwrap();
+    let guild_id = ParameterString::try_from("807161594245152800".as_bytes().to_vec()).unwrap();
+    let channel_id = ParameterString::try_from("1085873643529179216".as_bytes().to_vec()).unwrap();
+    let role_id = ParameterString::try_from("1088092822592307240".as_bytes().to_vec()).unwrap();
     let a3 = Assertion::A3(guild_id.clone(), channel_id.clone(), role_id.clone());
 
     let assertions = vec![a3];
